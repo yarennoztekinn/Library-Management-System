@@ -1,11 +1,11 @@
 package Library;
 
-public abstract class User {// setlerde email ve phoneNumber check
+public abstract class User {
 	
 	protected String name; 
 	protected String email; 
 	protected String phoneNumber; 
-	protected IOOperation[] operations; // arayüz türünden bir dizi oluşturabilir ve bu diziyi arayüzü uygulayan sınıfların örnekleriyle doldurabilirsiniz
+	protected IOOperation[] operations; 
 	
 	public User() {
 		
