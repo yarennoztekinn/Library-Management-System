@@ -19,19 +19,6 @@ public class Database {
 	private ArrayList<Order> orders = new ArrayList<Order>();
 	private ArrayList<Borrowing> borrowings = new ArrayList<Borrowing>();
 	
-	// Main.class.getClassLoader()
-		// runtimeda Sınıfların stack'e yüklenmesi işlemi sırasında Java sanal makinesi(JVM),ClassLoader adı verilen bir mekanizmayı kullanır.
-		// main sınıfının yükleyicisini (ClassLoader) alır. Bu, Main sınıfının Java sanal makinesi tarafından yüklenmesini sağlayan mekanizmadır.
-	//.getResource("Users")
-		// Yükleyiciyi kullanarak "Users" adında bir kaynak dosyasını bulur.
-	//.getFile()
-		// Kaynak dosyasının dosya yolunu döndürür. Bu yol, dosyanın konumunu belirtir.
-	//new File(...)
-	//Bu dosya yolunu kullanarak bir File nesnesi oluşturur. File sınıfı, bir dosyayı veya dizini temsil eder ve dosya yolunu alarak dosyanın işlemlerini yapmanızı sağlar.
-	/*
-	private File usersfile = new File(Main.class.getClassLoader().getResource("Users").getFile());
-	private File booksfile = new File(Main.class.getClassLoader().getResource("Books").getFile());
-	*/
 	private File usersfile = new File("C:\\OOP\\SelfPractise\\data\\Users");
 	private File booksfile = new File("C:\\OOP\\SelfPractise\\data\\Books");
 	private File ordersfile = new File("C:\\OOP\\SelfPractise\\data\\Orders");
@@ -45,25 +32,21 @@ public class Database {
 		}
 		if (!usersfile.exists()) {
 			try {
-				//usersfile.mkdirs();
 				usersfile.createNewFile();
 			} catch (Exception e) {}
 		}
 		if (!booksfile.exists()) {
 			try {
-				//booksfile.mkdirs();
 				booksfile.createNewFile();
 			} catch (Exception e) {}
 		}
 		if (!ordersfile.exists()) {
 			try {
-				//booksfile.mkdirs();
 				ordersfile.createNewFile();
 			} catch (Exception e) {}
 		}
 		if (!borrowingsfile.exists()) {
 			try {
-				//booksfile.mkdirs();
 				borrowingsfile.createNewFile();
 			} catch (Exception e) {}
 		}
@@ -81,10 +64,10 @@ public class Database {
 	}
 	
 	public int login(String phonenumber, String email) {
-		int n = -1; // eşleşme bulamazsa -1
+		int n = -1; 
 		for(User s: users) {
 			if (s.getPhoneNumber().matches(phonenumber) && s.getEmail().matches(email)) {
-				n = users.indexOf(s);// userları tutan arraylistte kaçıncı userda eşleşme buldu
+				n = users.indexOf(s);
 				break;
 			}
 		}
@@ -92,7 +75,7 @@ public class Database {
 	}
 	
 	public User getUser(int n) {
-		return users.get(n); // eşleşen userı döndürcek
+		return users.get(n); 
 	}
 	
 	public void addBook(Book book) {
@@ -104,12 +87,9 @@ public class Database {
 	private void getUsers() {
 		String text1 = "";
 		try {
-			
-			//usersfile adındaki dosyayı okumak için bir BufferedReader nesnesi oluşturur.
-			//Ardından bu nesne, br1 adında bir değişkene atanır 
 			BufferedReader br1 = new BufferedReader(new FileReader(usersfile));
 			String s1;
-			while ((s1 = br1.readLine())!= null) {// dosyadan bir satır okumak için readLine() yöntemi kullanılır.
+			while ((s1 = br1.readLine())!= null) {
 				text1= text1 + s1;
 			}
 			br1.close();
@@ -140,8 +120,6 @@ public class Database {
 			text1 = text1 + user.toString() + "<NewUser/>\n"; 
 		}
 		try {
-			//PrintWriter sınıfı, metin tabanlı çıktıları yazmak için kullanılır ve genellikle dosyalara yazmak için de kullanılır. 
-			//PrintWriter kullanarak text1 adlı metni usersfile dosyasına yazacaktır. print() yöntemi, dosyaya metin yazmak için kullanılır 
 			PrintWriter pw = new PrintWriter(usersfile);
 			pw.print(text1);
 			pw.close();
@@ -156,8 +134,6 @@ public class Database {
 			text1 = text1 + book.toString2() + "<NewBook/>\n"; 
 		}
 		try {
-			//PrintWriter sınıfı, metin tabanlı çıktıları yazmak için kullanılır ve genellikle dosyalara yazmak için de kullanılır. 
-			//PrintWriter kullanarak text1 adlı metni usersfile dosyasına yazacaktır. print() yöntemi, dosyaya metin yazmak için kullanılır 
 			PrintWriter pw = new PrintWriter(booksfile);
 			pw.print(text1);
 			pw.close();
@@ -192,8 +168,6 @@ public class Database {
 	public Book parseBook(String s) {
 		String[] a = s.split("<N/>");
 		Book book = new Book();
-		//Book book2 = new Book(a[0], a[1], a[2], a[3],null, Integer.parseInt(a[4]), Double.parseDouble(a[5]), Integer.parseInt(a[6]));
-		//da yapabilirdik. status u null yaptım kullanmadık hiç.
 		book.setName(a[0]);
 		book.setAuthor(a[1]);
 		book.setPublisher(a[2]);
@@ -253,7 +227,7 @@ public class Database {
 	
 	public void addOrder(Order order, Book book, int bookIndex) {
 		orders.add(order);
-		books.set(bookIndex, book);//books.set(bookIndex, book); ifadesi, books adlı ArrayList içindeki bookIndex indeksindeki Book nesnesini book ile değiştirir.
+		books.set(bookIndex, book);
 		saveOrders();
 		saveBooks();
 	}
@@ -332,8 +306,6 @@ public class Database {
 			text1 = text1 + borrow.toString2() + "<NewBorrowing/>\n"; 
 		}
 		try {
-			//PrintWriter sınıfı, metin tabanlı çıktıları yazmak için kullanılır ve genellikle dosyalara yazmak için de kullanılır. 
-			//PrintWriter kullanarak text1 adlı metni usersfile dosyasına yazacaktır. print() yöntemi, dosyaya metin yazmak için kullanılır 
 			PrintWriter pw = new PrintWriter(borrowingsfile);
 			pw.print(text1);
 			pw.close();
@@ -376,10 +348,10 @@ public class Database {
 	}
 
 	public void borrowBook(Borrowing borrowing, Book book, int bookIndex) {
-		borrowings.add(borrowing);//ödünç alınanlara ekle
-		books.set(bookIndex, book);// bilgileri güncelle.
-		saveBorrowings();//değişiklikleri kaydet
-		saveBooks(); // değişiklikleri kaydet
+		borrowings.add(borrowing);
+		books.set(bookIndex, book);
+		saveBorrowings();
+		saveBooks();
 	}
 	
 	public ArrayList<Borrowing> getBrws(){
