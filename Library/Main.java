@@ -12,7 +12,6 @@ public class Main {
 		System.out.println("Welcome to library Management system  \n");
 		
 		int num;
-//		do{
 			scanner = new Scanner((System.in));
 			System.out.println("0. Exit\n1. Login\n2. New user");
 			
@@ -24,7 +23,6 @@ public class Main {
 			case 2 : newUser();break;
 			default : System.out.println("Error!");
 			}
-//		}while(num != 0);
 		
 	}
 	
@@ -61,7 +59,7 @@ public class Main {
 		System.out.println("1. Admin \n2. Normal User");
 		int n2 = scanner.nextInt();
 		
-		User user;//default
+		User user;
 		if (n2 == 1) {
 			user = new Admin(name, email, phoneNumber);
 		}else {
